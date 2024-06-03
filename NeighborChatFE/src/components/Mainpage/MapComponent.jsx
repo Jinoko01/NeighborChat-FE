@@ -1,5 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Map, MapMarker} from "react-kakao-maps-sdk";
+import Marker from "../..//assets/Marker.png";
+
+const arr = [{ lat: 33.450701, lng: 126.570667}, {lat: 33.46, lng: 126.58 }];
 
 const MapComponent = () => {
   const [position, setPosition] = useState({ lat: 33.450701, lng: 126.570667 });
@@ -12,6 +15,7 @@ const MapComponent = () => {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       };
+
       setPosition(newPosition);
       setIsLoaded(true); // 맵이 로드되었음을 설정
     };
@@ -25,8 +29,7 @@ const MapComponent = () => {
         enableHighAccuracy: true,
         maximumAge: 0,
         timeout: 5000,
-      });
-
+      })
       navigator.geolocation.watchPosition(handleSuccess, handleError, {
         enableHighAccuracy: true,
         maximumAge: 0,
@@ -38,7 +41,7 @@ const MapComponent = () => {
   }, []);
 
   return (
-    <div style={{ width: '100%', height: '100vh' }}>
+    <div style={{ width: '100%', height: '100vh', position: "relative" }}>
       {isLoaded && (
         <Map
           center={{ lat: position.lat, lng: position.lng }}
@@ -47,8 +50,24 @@ const MapComponent = () => {
         >
           <MapMarker
             position={{ lat: position.lat, lng: position.lng }}
+            image={{
+              src: Marker, // 커스텀 마커 이미지 URL
+              size: {
+                width: 32,
+                height: 32,
+              },
+            }}
             title="You are here"
           />
+          {arr.map((item, i) => (
+            <MapMarker key={i} image={{
+              src: Marker, // 커스텀 마커 이미지 URL
+              size: {
+                width: 32,
+                height: 32,
+              },
+            }} position={{lat: item.lat, lng: item.lng}} />
+          ))}
         </Map>
       )}
     </div>
