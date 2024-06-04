@@ -53,8 +53,8 @@ const MapComponent = () => {
             image={{
               src: Marker, // 커스텀 마커 이미지 URL
               size: {
-                width: 32,
-                height: 32,
+                width: 64,
+                height: 64,
               },
             }}
             title="You are here"
@@ -63,8 +63,8 @@ const MapComponent = () => {
             <MapMarker key={i} image={{
               src: Marker, // 커스텀 마커 이미지 URL
               size: {
-                width: 32,
-                height: 32,
+                width: 64,
+                height: 64,
               },
             }} position={{lat: item.lat, lng: item.lng}} />
           ))}
