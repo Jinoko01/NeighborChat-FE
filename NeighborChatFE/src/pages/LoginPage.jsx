@@ -9,10 +9,9 @@ const LoginPage = () => {
   return (
     <div style={{ position: 'relative', height: '100vh' }}>
       <MapComponent />
-      { isModalOpen && (
-        <Modal>
-          <div className={styles.inner_div}>
-            <h1 className={styles.logo}>로그인</h1>
+      <Modal>
+        <div>
+          <h1 className={styles.logo}>로그인</h1>
 
             <input
               type="text"
@@ -21,22 +20,21 @@ const LoginPage = () => {
               placeholder="아이디"
             />
 
-              <input
-                type="password"
-                id="password"
-                className={styles.input}
-                placeholder="비밀번호"
-              />
-              
-              <label className={styles.label}>테스트</label>
-                
-            <Button onClick={closeModal}>
-              로그인
-            </Button>
-          </div>
-          
-        </Modal>
-      )}
+            <input
+              type="password"
+              id="password"
+              className={styles.input}
+              placeholder="비밀번호"
+            />
+
+            <label className={styles.label}>테스트</label>
+
+          <Button>
+            로그인
+          </Button>
+        </div>
+
+      </Modal>
     </div>
   );
 };
