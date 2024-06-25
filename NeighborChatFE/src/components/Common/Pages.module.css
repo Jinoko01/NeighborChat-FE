@@ -28,9 +28,3 @@
   max-width: 300px;
   margin-bottom: 15px;
 }
-
-.inner-div {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
