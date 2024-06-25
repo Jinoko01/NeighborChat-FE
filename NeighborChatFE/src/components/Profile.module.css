@@ -1,0 +1,12 @@
+.circle {
+  width: 150px;
+  height: 150px; 
+  background-color: orange;
+  border-radius: 70%;
+}
+.profile {
+  width: 60%;
+  height: 70%;
+  padding: 20px;
+  object-fit: cover;
+}
