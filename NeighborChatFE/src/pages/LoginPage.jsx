@@ -12,7 +12,7 @@ const LoginPage = () => {
   return (
     <div style={{ position: 'relative', height: '100vh' }}>
       <MapComponent />
-      { //isModalOpen && (
+      { isModalOpen && (
         <Modal>
           <div className={styles.inner_div}>
             <h1 className={styles.logo}>로그인</h1>
@@ -39,8 +39,7 @@ const LoginPage = () => {
           </div>
           
         </Modal>
-      // ) 
-      }
+      )}
     </div>
   );
 };

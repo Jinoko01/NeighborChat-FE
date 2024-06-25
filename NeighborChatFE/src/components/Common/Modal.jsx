@@ -3,8 +3,8 @@ import './Modal.module.css';
 
 const Modal = ({ children }) => {
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
+    <div className="ModalOverlay">
+      <div className="ModalContent">
         {children}
       </div>
     </div>
