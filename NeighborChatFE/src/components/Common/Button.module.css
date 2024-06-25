@@ -1,0 +1,12 @@
+.button {
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 10px 20%;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  margin-bottom: 30px;
+}
