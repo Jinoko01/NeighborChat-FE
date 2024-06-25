@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
-import {Map, MapMarker} from "react-kakao-maps-sdk";
-import Marker from "../..//assets/Marker.png";
+import {Map} from "react-kakao-maps-sdk";
+import MarkerComponent from "../common/MarkerComponent.jsx";
 
 const arr = [{ lat: 33.450701, lng: 126.570667}, {lat: 33.46, lng: 126.58 }];
 
@@ -41,32 +41,22 @@ const MapComponent = () => {
   }, []);
 
   return (
-    <div style={{ width: '100%', height: '100vh', position: "relative" }}>
+    <div style={{ width: '100vw', height: '100vh', position: "relative" }}>
       {isLoaded && (
         <Map
           center={{ lat: position.lat, lng: position.lng }}
-          style={{ width: '100%', height: '100%' }}
+          style={{ width: '100vw', height: '100vh' }}
           level={level}
         >
-          <MapMarker
+          <MarkerComponent
+            id={"me"}
             position={{ lat: position.lat, lng: position.lng }}
-            image={{
-              src: Marker, // 커스텀 마커 이미지 URL
-              size: {
-                width: 64,
-                height: 64,
-              },
-            }}
-            title="You are here"
           />
           {arr.map((item, i) => (
-            <MapMarker key={i} image={{
-              src: Marker, // 커스텀 마커 이미지 URL
-              size: {
-                width: 64,
-                height: 64,
-              },
-            }} position={{lat: item.lat, lng: item.lng}} />
+            <MarkerComponent
+              key={i}
+              id={i}
+              position={{lat: item.lat, lng: item.lng}} />
           ))}
         </Map>
       )}
