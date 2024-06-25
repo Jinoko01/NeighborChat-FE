@@ -5,9 +5,6 @@ import Button from '../components/Common/Button';
 import styles from '../components/Common/Pages.module.css';
 
 const LoginPage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(true);
-
-  const closeModal = () => setIsModalOpen(false);
 
   return (
     <div style={{ position: 'relative', height: '100vh' }}>
@@ -17,12 +14,12 @@ const LoginPage = () => {
           <div className={styles.inner_div}>
             <h1 className={styles.logo}>로그인</h1>
 
-              <input
-                type="text"
-                id="username"
-                className={styles.input}
-                placeholder="아이디"
-              />
+            <input
+              type="text"
+              id="username"
+              className={styles.input}
+              placeholder="아이디"
+            />
 
               <input
                 type="password"
