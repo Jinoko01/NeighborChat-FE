@@ -41,11 +41,11 @@ const MapComponent = () => {
   }, []);
 
   return (
-    <div style={{ width: '100%', height: '100vh', position: "relative" }}>
+    <div style={{ width: '100vw', height: '100vh', position: "relative" }}>
       {isLoaded && (
         <Map
           center={{ lat: position.lat, lng: position.lng }}
-          style={{ width: '100%', height: '100%' }}
+          style={{ width: '100vw', height: '100%' }}
           level={level}
         >
           <MapMarker

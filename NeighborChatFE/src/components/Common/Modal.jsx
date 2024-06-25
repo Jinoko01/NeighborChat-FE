@@ -1,5 +1,5 @@
 import React from 'react';
-import './Modal.css';
+import './Modal.module.css';
 
 const Modal = ({ children }) => {
   return (
