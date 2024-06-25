@@ -1,12 +1,18 @@
 import './App.css'
 import Mainpage from "./pages/Mainpage.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
-    <div>
-      <Mainpage />
-    </div>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Mainpage />} />
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App
