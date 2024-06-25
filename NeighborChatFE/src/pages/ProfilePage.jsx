@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Modal from '../components/Modal';
+import Modal from '../components/Common/Modal';
 import MapComponent from '../components/Mainpage/MapComponent';
-import Button from '../components/Button';
+import Button from '../components/Common/Button';
 import ProfileImage from '../assets/Profile.png'
-import styles from '../components/Profile.module.css'
+import styles from '../components/Common/Profile.module.css';
 
 
 const ProfilePage = () => {
