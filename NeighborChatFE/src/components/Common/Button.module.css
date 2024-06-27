@@ -8,5 +8,6 @@
   font-size: 16px;
   font-weight: bold;
   transition: background-color 0.3s;
-  margin-bottom: 30px;
+  margin-top: 30px;
+  width : 250px;
 }
