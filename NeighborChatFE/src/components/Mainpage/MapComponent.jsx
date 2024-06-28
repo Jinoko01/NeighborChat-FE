@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Map } from "react-kakao-maps-sdk";
 import MarkerComponent from "../Common/MarkerComponent.jsx";
-import { useGeoLocation } from "../../hooks/useGeoLocation.js";
 
 const arr = [{ lat: 33.450701, lng: 126.570667}, {lat: 33.46, lng: 126.58 }];
 

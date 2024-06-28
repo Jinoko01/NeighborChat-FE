@@ -1,11 +1,24 @@
-import { Container as MapDiv, NaverMap, Marker, useNavermaps } from "react-naver-maps";
+import { Container as MapDiv, NaverMap, Marker } from "react-naver-maps";
+import {useEffect, useState} from "react";
 
-const MyMap = () => {
-  const navermaps = useNavermaps();
+const MyMap = ({ location }) => {
+  const { lat, lng } = location.coordinates;
+  const [center, setCenter] = useState(null);
+
+  useEffect(() => {
+    if (location.loaded) {
+      setCenter({
+        lat,
+        lng
+      });
+    }
+  }, [location]);
 
   return (
-    <NaverMap defaultCenter={new navermaps.LatLng(37.3595704, 127.105399)} zoom={18} zoomControl={true} zoomControlOptions={{position: naver.maps.Position.TOP_RIGHT}}>
-      <Marker defaultPosition={new navermaps.LatLng(37.3595704, 127.105399)} />
+    <NaverMap center={center} zoom={18} zoomControl={true} >
+      {location.loaded && (
+        <Marker position={{ lat, lng }} />
+      )}
     </NaverMap>
   );
 };
