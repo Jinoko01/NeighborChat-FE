@@ -3,7 +3,7 @@
   color: white;
   border: none;
   padding: 1.5vh;
-  width: 55%;
+  width: inherit;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
