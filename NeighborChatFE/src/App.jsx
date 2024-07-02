@@ -6,8 +6,6 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import TestPage from "./pages/TestPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
@@ -16,6 +14,8 @@ function App() {
         <Route path="/" element={<Mainpage />} />
         <Route path="/test" element={<TestPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </Router>
   );

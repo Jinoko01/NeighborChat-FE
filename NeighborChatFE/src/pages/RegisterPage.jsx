@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import Modal from '../components/Common/Modal';
-import MapComponent from '../components/Mainpage/MapComponent';
 import Button from '../components/Common/Button';
 import styles from '../components/Common/Pages.module.css';
+import NaverMapComponent from "../components/Mainpage/NaverMapComponent.jsx";
 
 const RegisterPage = () => {
 
   return (
     <div style={{ position: 'relative', height: '100vh' }}>
-      <MapComponent />
+      <NaverMapComponent />
       <Modal>
         <div className={styles.contentContainer}>
           <h1 className={styles.logo}>회원가입</h1>
