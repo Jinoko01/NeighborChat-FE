@@ -27,12 +27,11 @@ const LoginPage = () => {
             className={styles.input}
             placeholder="비밀번호"
           />
-          <Button>
+          <Button >
             로그인
           </Button>
           <div className={styles.footer}>
             <Link to="/register" className={styles.link}>회원가입</Link>
-            <Link to="/forgotPassword" className={styles.link}>비밀번호 찾기</Link>
           </div>
         </div>
       </Modal>

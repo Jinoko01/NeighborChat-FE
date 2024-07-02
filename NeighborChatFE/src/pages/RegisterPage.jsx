@@ -13,6 +13,11 @@ const RegisterPage = () => {
     accountLoginPwCheck: '',
   });
 
+  const [error, setError] = useState({
+    error: false,
+    content: '',
+  })
+
   const handleChange = (e) => {
     const {name, value} = e.target;
 
@@ -21,6 +26,18 @@ const RegisterPage = () => {
       [name]: value,
     });
   };
+
+  const handelRegister = () => {
+    if (register.accountLoginId == '' || register.accountLoginPw == '' || register.accountLoginPwCheck == ''){
+      setError({error:true, content:'빈 칸이 존재합니다.'})
+      return 
+    }
+
+    if (register.accountLoginPw !== register.accountLoginPwCheck){
+      setError({error:true, content:'비밀번호가 일치하지 않습니다.'})
+      return 
+    }
+  }
 
   return (
     <div>
@@ -57,7 +74,10 @@ const RegisterPage = () => {
             value = {register.accountLoginPwCheck}
             onChange={handleChange}
           />
-          <Button>
+
+          <label>{error.error && error.content}</label>
+
+          <Button onClick={handelRegister}>
             회원가입
           </Button>
           <div className={styles.footer}>
