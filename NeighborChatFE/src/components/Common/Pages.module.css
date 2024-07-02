@@ -1,3 +1,10 @@
+* {
+  font-size: 16px;
+  font-family: Malgun Gothic;
+  font-weight: 0;
+  border: none;
+}
+
 .logo {
   font-size: 2em;
   color: orange;
@@ -5,10 +12,11 @@
 }
 
 .contentContainer {
-  display : flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 15px;
+  width:80%
 }
 
 .input {
@@ -16,12 +24,9 @@
   text-align: left;
   margin: 0 auto;
   padding: 10px;
-  border: none;
   border-bottom: 1px solid #ccc;
-  font-size: 1em;
   outline: none;
-  width: 200px;
-  max-width: 200px;
+  width: inherit;
   height: 30px;
 }
 
@@ -42,12 +47,46 @@
 .footer {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: 90%;
+  float: none;
+  padding-left: 20px;
+}
+
+.footer .link {
+  text-decoration: none;
+  color: inherit;
+  font-size: 0.9em;
+  font-size: 8px;
+}
+
+.inner {
+  display: flex;
+  padding-left: 25px;
+}
+.inner .circle {
+  width: 150px;
+  height: 150px;
+  background-color: orange;
+  border-radius: 70%;
+}
+.inner .profile {
+  width: 60%;
+  height: 70%;
+  object-fit: cover;
+  padding-top: 15px;
+}
+.inner .contents {
+  width: 200px;
+  float: right;
+  padding-left: 30px;
+}
+.inner .contents input {
+  width: 200px;
   max-width: 220px;
 }
 
 .link {
   text-decoration: none;
-  color : inherit;
+  color: inherit;
   font-size: 0.9em;
 }
