@@ -7,6 +7,30 @@ import NaverMapComponent from "../components/Mainpage/NaverMapComponent.jsx";
 import {NavermapsProvider} from "react-naver-maps";
 
 const LoginPage = () => {
+  const [login, setLogin] = useState({
+    accountLoginId: '',
+    accountLoginPw: '',
+  });
+
+  const [error, setError] = useState({
+    error: false,
+    content: '',
+  })
+
+  const handleChange = (e) => {
+    const {name, value} = e.target;
+    setLogin({
+      ...login,
+      [name]: value,
+    });
+  };
+
+  const handleLogin = () => {
+    if(login.accountLoginId == '' || login.accountLoginPw == ''){
+      setError({error:true, content:'빈 칸이 존재합니다.'})
+      return 
+    }
+  }
 
   return (
     <div>
@@ -20,14 +44,18 @@ const LoginPage = () => {
             type="text"
             className={styles.input}
             placeholder="아이디"
-            
+            onChange={handleChange}
           />
           <input
             type="password"
             className={styles.input}
             placeholder="비밀번호"
+            onChange={handleChange}
           />
-          <Button >
+
+          <label>{error.error && error.content}</label>
+
+          <Button onClick={handleLogin}>
             로그인
           </Button>
           <div className={styles.footer}>

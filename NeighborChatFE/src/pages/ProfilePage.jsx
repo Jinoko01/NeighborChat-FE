@@ -14,8 +14,18 @@ const ProfilePage = ({setOpenSetting}) => {
     intro: '',
   });
 
+  const [error, setError] = useState({
+    error: false,
+    content: '',
+  })
+
   const toggleEditMode = () => {
+    if(userInfo.nickname == '' && isEditing){
+      setError({error:true, content:'닉네임을 입력해주세요.'})
+      return 
+    }
     setIsEditing(!isEditing);
+    setError({error:false, content:''})
   };
 
   const handleChange = (e) => {
@@ -69,6 +79,7 @@ const ProfilePage = ({setOpenSetting}) => {
                   )
                 }
               </div>
+              <label>{error.error && error.content}</label>
               <Button onClick={toggleEditMode}>
               {isEditing ? '저장' : '정보수정'}
               </Button>
