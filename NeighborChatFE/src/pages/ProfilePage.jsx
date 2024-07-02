@@ -4,9 +4,10 @@ import Modal from '../components/Common/Modal';
 import Button from '../components/Common/Button';
 import ProfileImage from '../assets/Profile.png'
 import styles from '../components/Common/Pages.module.css';
+import XIcon from '../assets/X.png'
 
 
-const ProfilePage = () => {
+const ProfilePage = ({setOpenSetting}) => {
   const [isEditing, setIsEditing] = useState(false);
   const [userInfo, setUserInfo] = useState({
     nickname: '',
@@ -30,6 +31,10 @@ const ProfilePage = () => {
     <div>
       <Modal>
         <div style={{ width: "100%"}}>
+          <button style={{ position: "absolute", top:"10px", left:"20px", cursor:"pointer"}} onClick={() => {setOpenSetting(false)}}>
+            <img src={XIcon} alt="XIcon" style={{width:"10px", height:"10px"}} />
+          </button>
+
           <h1 className={styles.logo}>프로필</h1>
 
           <div className={styles.inner}>

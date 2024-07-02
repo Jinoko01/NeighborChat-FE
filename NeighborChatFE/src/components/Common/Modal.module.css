@@ -12,6 +12,7 @@
 }
   
 .modalContent {
+  position:relative;
   width: 50%;
   max-width: 450px;
   background-color: white;
@@ -21,6 +22,6 @@
   z-index: 32;
   display: flex;
   flex-direction: column;
-  padding-bottom : 30px;
   align-items: center;
+  padding-bottom : 30px;
 }

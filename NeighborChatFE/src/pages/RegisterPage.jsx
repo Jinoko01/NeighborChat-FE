@@ -20,40 +20,41 @@ const RegisterPage = () => {
       ...register,
       [name]: value,
     });
-
-    console.log(register);
   };
 
   return (
-    <div style={{ position: 'relative', height: '100vh' }}>
+    <div>
       <NavermapsProvider ncpClientId='xf99yhizgh'>
         <NaverMapComponent />
       </NavermapsProvider>
       <Modal>
         <div className={styles.contentContainer}>
           <h1 className={styles.logo}>회원가입</h1>
+
           <input
             type="text"
             className={styles.input}
             placeholder="아이디"
-            name="accountLoginId"
-            value={register.accountLoginId}
+            name = "accountLoginId"
+            value = {register.accountLoginId}
             onChange={handleChange}
           />
+          
           <input
             type="password"
             className={styles.input}
             placeholder="비밀번호"
-            name="accountLoginPw"
-            value={register.accountLoginPw}
+            name = "accountLoginPw"
+            value = {register.accountLoginPw}
             onChange={handleChange}
           />
+
           <input
             type="password"
             className={styles.input}
             placeholder="비밀번호 확인"
-            name="accountLoginPwCheck"
-            value={register.accountLoginPwCheck}
+            name = "accountLoginPwCheck"
+            value = {register.accountLoginPwCheck}
             onChange={handleChange}
           />
           <Button>

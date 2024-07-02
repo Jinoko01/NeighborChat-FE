@@ -9,7 +9,7 @@ import {NavermapsProvider} from "react-naver-maps";
 const LoginPage = () => {
 
   return (
-    <div style={{ position: 'relative', height: '100vh' }}>
+    <div>
       <NavermapsProvider ncpClientId='xf99yhizgh'>
         <NaverMapComponent />
       </NavermapsProvider>
@@ -20,6 +20,7 @@ const LoginPage = () => {
             type="text"
             className={styles.input}
             placeholder="아이디"
+            
           />
           <input
             type="password"

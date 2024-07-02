@@ -14,7 +14,7 @@ const Mainpage = () => {
         <NaverMapComponent />
       </NavermapsProvider>
       <Bar openSetting={openSetting} setOpenSetting={setOpenSetting} />
-      {openSetting && <ProfilePage />}
+      {openSetting && <ProfilePage setOpenSetting={setOpenSetting}/>}
     </div>
   );
 };

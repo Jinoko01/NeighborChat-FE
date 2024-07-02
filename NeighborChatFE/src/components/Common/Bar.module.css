@@ -36,7 +36,6 @@ button {
   bottom: 2px;
   z-index: 29;
   display: flex;
-  /* justify-content: space-between; */
   margin: 0;
 }
 .modalButton button {
