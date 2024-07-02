@@ -11,25 +11,25 @@ button {
   height: 50px;
   background-color: orange;
   display: flex;
-  justify-content: center;
+  justify-content: right;
   align-items: center;
   z-index: 27;
 }
   
 .modalContent {
-  width: 93rem;
-  max-width: 93rem;
-  position: absolute;
-  right: 5.6rem;
-  left: 1 rem;
+  width: 100%;
+  position:relative;
   background-color: white;
   padding: 8px 20px;
+  margin-left: 10px;
+  margin-right: 85px;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   z-index: 28;
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .modalButton {
