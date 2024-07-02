@@ -5,10 +5,10 @@ import {useState} from "react";
 
 const NaverMapComponent = () => {
   const [location, setLocation] = useState({
-    loaded: false,
+    loaded: true,
     coordinates: {
-      lat: 33.450701,
-      lng: 126.570667,
+      lat: 37.3587574,
+      lng: 127.1052528,
     }
   });
 
