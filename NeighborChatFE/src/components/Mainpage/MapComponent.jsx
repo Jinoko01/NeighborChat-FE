@@ -1,6 +1,7 @@
-import {useEffect, useState} from 'react';
-import {Map} from "react-kakao-maps-sdk";
+import { useEffect, useState } from 'react';
+import { Map } from "react-kakao-maps-sdk";
 import MarkerComponent from "../Common/MarkerComponent.jsx";
+import { useGeoLocation } from "../../hooks/useGeoLocation.js";
 
 const arr = [{ lat: 33.450701, lng: 126.570667}, {lat: 33.46, lng: 126.58 }];
 
@@ -27,13 +28,8 @@ const MapComponent = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(handleSuccess, handleError, {
         enableHighAccuracy: true,
-        maximumAge: 0,
-        timeout: 5000,
-      })
-      navigator.geolocation.watchPosition(handleSuccess, handleError, {
-        enableHighAccuracy: true,
-        maximumAge: 0,
-        timeout: 5000,
+        maximumAge: 1000 * 3600 * 24,
+        timeout: 1000 * 10,
       });
     } else {
       alert('Geolocation is not supported by this browser.');
@@ -41,7 +37,7 @@ const MapComponent = () => {
   }, []);
 
   return (
-    <div style={{ width: '100vw', height: '100vh', position: "relative" }}>
+    <div style={{ width: '100vw', height: '100vh', position: "absolute", left: 0, top: 0 }}>
       {isLoaded && (
         <Map
           center={{ lat: position.lat, lng: position.lng }}

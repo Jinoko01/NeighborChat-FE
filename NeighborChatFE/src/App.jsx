@@ -4,6 +4,7 @@ import LoginPage from "./pages/LoginPage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import TestPage from "./pages/TestPage.jsx";
 
 function App() {
   return (

@@ -1,0 +1,12 @@
+version: "3.2"
+services:
+  frontend:
+    restart: always
+    command : npm run dev
+    container_name: neighborchat-fe
+    build:
+      context: ./NeighborChatFE/
+      dockerfile: NeighborChatFE/Dockerfile
+    ports:
+      - "5173:5173"
+    stdin_open: true

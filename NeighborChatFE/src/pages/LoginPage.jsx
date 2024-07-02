@@ -17,6 +17,7 @@ const LoginPage = () => {
             type="text"
             className={styles.input}
             placeholder="아이디"
+            
           />
           <input
             type="password"
