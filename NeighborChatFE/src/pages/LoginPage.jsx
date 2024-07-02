@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 import Modal from '../components/Common/Modal';
 import MapComponent from '../components/Mainpage/MapComponent';
 import Button from '../components/Common/Button';
@@ -10,30 +11,26 @@ const LoginPage = () => {
     <div style={{ position: 'relative', height: '100vh' }}>
       <MapComponent />
       <Modal>
-        <div>
+        <div className={styles.contentContainer}>
           <h1 className={styles.logo}>로그인</h1>
-
-            <input
-              type="text"
-              id="username"
-              className={styles.input}
-              placeholder="아이디"
-            />
-
-            <input
-              type="password"
-              id="password"
-              className={styles.input}
-              placeholder="비밀번호"
-            />
-
-            <label className={styles.label}>테스트</label>
-
+          <input
+            type="text"
+            className={styles.input}
+            placeholder="아이디"
+          />
+          <input
+            type="password"
+            className={styles.input}
+            placeholder="비밀번호"
+          />
           <Button>
             로그인
           </Button>
+          <div className={styles.footer}>
+            <Link to="/register" className={styles.link}>회원가입</Link>
+            <Link to="/forgotPassword" className={styles.link}>비밀번호 찾기</Link>
+          </div>
         </div>
-
       </Modal>
     </div>
   );
