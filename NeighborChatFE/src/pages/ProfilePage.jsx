@@ -4,34 +4,32 @@ import Modal from '../components/Common/Modal';
 import Button from '../components/Common/Button';
 import ProfileImage from '../assets/Profile.png'
 import styles from '../components/Common/Pages.module.css';
-import NaverMapComponent from "../components/Mainpage/NaverMapComponent.jsx";
-import {NavermapsProvider} from "react-naver-maps";
 
 
 const ProfilePage = () => {
   const [isEditing, setIsEditing] = useState(false);
-  const [nickname, setNickname] = useState('닉네임');
-  const [intro, setIntro] = useState('한 줄 소개(10자 이내)');
+  const [userInfo, setUserInfo] = useState({
+    nickname: '',
+    intro: '',
+  });
 
   const toggleEditMode = () => {
     setIsEditing(!isEditing);
   };
 
-  const handleNicknameChange = (e) => {
-    setNickname(e.target.value);
-  };
+  const handleChange = (e) => {
+    const {name, value} = e.target;
 
-  const handleIntroChange = (e) => {
-    setIntro(e.target.value);
+    setUserInfo({
+      ...userInfo,
+      [name]: value,
+    });
   };
 
   return (
-    <div style={{ position: 'relative', height: '100vh' }}>
-      <NavermapsProvider ncpClientId='xf99yhizgh'>
-        <NaverMapComponent />
-      </NavermapsProvider>
+    <div>
       <Modal>
-        <div>
+        <div style={{ width: "100%"}}>
           <h1 className={styles.logo}>프로필</h1>
 
           <div className={styles.inner}>
@@ -42,36 +40,38 @@ const ProfilePage = () => {
               <div className={styles.details}>
                 {isEditing ? (
                   <>
-                  <input
-                  type="text"
-                  className={styles.input}
-                  value={nickname}
-                  onChange={handleNicknameChange} />
-                  <input
-                  type="text"
-                  className={styles.input}
-                  maxlength='10'
-                  value={intro}
-                  onChange={handleIntroChange} />
+                    <input
+                    type="text"
+                    placeholder="닉네임을 입력해주세요."
+                    className={styles.input}
+                    name="nickname"
+                    value={userInfo.nickname}
+                    onChange={handleChange} />
+                    <input
+                    type="text"
+                    placeholder="한줄소개를 입력해주세요."
+                    className={styles.input}
+                    maxLength='10'
+                    name="intro"
+                    value={userInfo.intro}
+                    onChange={handleChange} />
                   </>) :
                   (
                   <>
-                    <label className={styles.label}>{nickname}</label>
-                    <label className={styles.label}>{intro}</label>
+                    <input className={styles.label} readOnly={true} value={userInfo.nickname} />
+                    <input className={styles.label} readOnly={true} value={userInfo.intro} maxLength='10' />
                   </>
-                  )}
+                  )
+                }
               </div>
               <Button onClick={toggleEditMode}>
               {isEditing ? '저장' : '정보수정'}
               </Button>
             </div>
           </div>
-
           <div className={styles.footer}>
-                <Link to="/register" className={styles.link}>회원가입</Link>
-                <Link to="/forgotPassword" className={styles.link}>비밀번호 찾기</Link>
+            <Link to="/login" className={styles.link}>로그아웃</Link>
           </div>
-          
         </div>
       </Modal>
     </div>

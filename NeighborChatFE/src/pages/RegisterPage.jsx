@@ -4,6 +4,7 @@ import Button from '../components/Common/Button';
 import styles from '../components/Common/Pages.module.css';
 import NaverMapComponent from "../components/Mainpage/NaverMapComponent.jsx";
 import {NavermapsProvider} from "react-naver-maps";
+import {Link} from "react-router-dom";
 
 const RegisterPage = () => {
 
@@ -16,31 +17,30 @@ const RegisterPage = () => {
         <div className={styles.contentContainer}>
           <h1 className={styles.logo}>회원가입</h1>
 
-            <input
-              type="text"
-              className={styles.input}
-              placeholder="아이디"
-            />
-            
-            <input
-              type="password"
-              className={styles.input}
-              placeholder="비밀번호"
-            />
+          <input
+            type="text"
+            className={styles.input}
+            placeholder="아이디"
+          />
 
-            <input
-              type="password"
-              className={styles.input}
-              placeholder="비밀번호 확인"
-            />
+          <input
+            type="password"
+            className={styles.input}
+            placeholder="비밀번호"
+          />
 
-            <label className={styles.label}>테스트</label>
-
+          <input
+            type="password"
+            className={styles.input}
+            placeholder="비밀번호 확인"
+          />
           <Button>
             회원가입
           </Button>
+          <div className={styles.footer}>
+            <Link to="/login" className={styles.link}>로그인</Link>
+          </div>
         </div>
-
       </Modal>
     </div>
   );
