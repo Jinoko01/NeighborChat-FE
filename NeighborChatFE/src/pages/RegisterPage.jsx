@@ -3,12 +3,15 @@ import Modal from '../components/Common/Modal';
 import Button from '../components/Common/Button';
 import styles from '../components/Common/Pages.module.css';
 import NaverMapComponent from "../components/Mainpage/NaverMapComponent.jsx";
+import {NavermapsProvider} from "react-naver-maps";
 
 const RegisterPage = () => {
 
   return (
     <div style={{ position: 'relative', height: '100vh' }}>
-      <NaverMapComponent />
+      <NavermapsProvider ncpClientId='xf99yhizgh'>
+        <NaverMapComponent />
+      </NavermapsProvider>
       <Modal>
         <div className={styles.contentContainer}>
           <h1 className={styles.logo}>회원가입</h1>

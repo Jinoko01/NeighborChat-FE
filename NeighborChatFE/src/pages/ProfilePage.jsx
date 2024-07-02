@@ -5,6 +5,7 @@ import Button from '../components/Common/Button';
 import ProfileImage from '../assets/Profile.png'
 import styles from '../components/Common/Pages.module.css';
 import NaverMapComponent from "../components/Mainpage/NaverMapComponent.jsx";
+import {NavermapsProvider} from "react-naver-maps";
 
 
 const ProfilePage = () => {
@@ -26,7 +27,9 @@ const ProfilePage = () => {
 
   return (
     <div style={{ position: 'relative', height: '100vh' }}>
-      <NaverMapComponent />
+      <NavermapsProvider ncpClientId='xf99yhizgh'>
+        <NaverMapComponent />
+      </NavermapsProvider>
       <Modal>
         <div>
           <h1 className={styles.logo}>프로필</h1>
