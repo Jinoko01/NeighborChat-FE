@@ -1,11 +1,46 @@
-import { Container as MapDiv, NaverMap, Marker, useNavermaps } from "react-naver-maps";
+import { Container as Maps, NaverMap, Marker } from "react-naver-maps";
+import {useEffect, useState} from "react";
 
-const MyMap = () => {
-  const navermaps = useNavermaps();
+const MyMap = ({ location }) => {
+  const { lat, lng } = location.coordinates;
+  const [center, setCenter] = useState({
+    lat: 37.3587574,
+    lng: 127.1052528,
+  });
+  const [markerPosition, setMarkerPosition] = useState({
+    lat: 37.3587574,
+    lng: 127.1052528,
+  });
+
+  useEffect(() => {
+    if (location.loaded) {
+      setCenter({
+        lat,
+        lng
+      });
+      setMarkerPosition({
+        lat,
+        lng
+      });
+    }
+  }, [location]);
+
+  // 지도 중심이 변경될 때 마커 위치 갱신
+  const onUpdateMarkerPosition = (e) => {
+    const newCenter = e.coord;
+    console.log(newCenter);
+    setMarkerPosition({
+      lat: newCenter.y,
+      lng: newCenter.x,
+    });
+    console.log(center);
+  };
 
   return (
-    <NaverMap defaultCenter={new navermaps.LatLng(37.3595704, 127.105399)} zoom={18} zoomControl={true} zoomControlOptions={{position: naver.maps.Position.TOP_RIGHT}}>
-      <Marker defaultPosition={new navermaps.LatLng(37.3595704, 127.105399)} />
+    <NaverMap center={center} zoom={18} zoomControl={true} onClick={onUpdateMarkerPosition} >
+      {location.loaded && (
+        <Marker position={markerPosition} style={{position: "relative"}} />
+      )}
     </NaverMap>
   );
 };
