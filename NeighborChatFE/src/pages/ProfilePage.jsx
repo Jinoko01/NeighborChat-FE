@@ -6,6 +6,7 @@ import ProfileImage from '../assets/Profile.png'
 import styles from '../components/Common/Pages.module.css';
 import XIcon from '../assets/X.png'
 
+import axios from 'axios';
 
 const ProfilePage = ({setOpenSetting}) => {
   const [isEditing, setIsEditing] = useState(false);
