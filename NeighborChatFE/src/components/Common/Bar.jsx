@@ -22,6 +22,8 @@ const Bar = ({ openSetting, setOpenSetting, markerPosition, setMarkerPosition })
         "content": chat,
         "latitude": markerPosition[0],
         "longitude": markerPosition[1],
+      }, {
+        withCredentials: true
       }).then((res) => {
         setChat('');
       })
@@ -34,6 +36,8 @@ const Bar = ({ openSetting, setOpenSetting, markerPosition, setMarkerPosition })
       "content": chat,
       "latitude": markerPosition[0],
       "longitude": markerPosition[1],
+    }, {
+      withCredentials: true
     }).then((res) => {
       setChat('');
     })
