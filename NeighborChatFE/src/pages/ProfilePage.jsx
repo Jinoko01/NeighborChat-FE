@@ -65,7 +65,7 @@ const ProfilePage = ({ setOpenSetting }) => {
         const { message } = error.response.data;
         setError({ error: true, content: message });
       } else {
-        setError({ error: true, content: '정보 수정 중 오류가 발생했습니다1.' });
+        setError({ error: true, content: '정보 수정 중 오류가 발생했습니다.' });
       }
       console.error('Failed to update user info:', error);
     }
@@ -83,7 +83,7 @@ const ProfilePage = ({ setOpenSetting }) => {
         const { message } = error.response.data;
         setError({ error: true, content: message });
       } else {
-        setError({ error: true, content: '정보 수정 중 오류가 발생했습니다2.' });
+        setError({ error: true, content: '정보 수정 중 오류가 발생했습니다.' });
         handleLogout();
       }
       console.error('Failed to update user info:', error);
