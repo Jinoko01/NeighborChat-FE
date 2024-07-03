@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import {MapContainer, TileLayer, Marker, Popup, useMapEvents} from 'react-leaflet';
+import React, {useEffect, useState} from 'react';
+import {MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import {datas} from '../../mocks/datas.js';
+import L from 'leaflet';
 
-const MapComponent = () => {
-  const position = [36.14608316034982, 128.39243213457368];
-  const [markerPosition, setMarkerPosition] = useState(position);
+const MapComponent = ({ position, markerPosition, setMarkerPosition }) => {
 
   const LocationMarker = () => {
     useMapEvents({
@@ -21,6 +21,25 @@ const MapComponent = () => {
     );
   }
 
+  const GetMarker = () => {
+    const map = useMap();
+
+    useEffect(() => {
+      datas.forEach((data) => {
+        const popup = L.popup({
+          autoClose: false,
+          closeOnClick: false,
+          closeButton: false,
+        })
+          .setLatLng([data.latitude, data.longitude])
+          .setContent(data.content)
+          .openOn(map);
+      })
+    }, []);
+
+    return null;
+  }
+
   return (
     <MapContainer center={position} zoom={18} style={{ height: "100vh", width: "100%", zIndex: "25" }}>
       <TileLayer
@@ -28,6 +47,7 @@ const MapComponent = () => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
       <LocationMarker />
+      <GetMarker />
     </MapContainer>
   )
 }

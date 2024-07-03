@@ -4,9 +4,10 @@ import styles from './Bar.module.css';
 import sendIcon from '../../assets/send.png'
 import chatIcon from '../../assets/chat.png'
 import settingIcon from '../../assets/setting.png'
+import axios from "axios";
 
 
-const Bar = ({ openSetting, setOpenSetting }) => {
+const Bar = ({ openSetting, setOpenSetting, markerPosition, setMarkerPosition }) => {
   const [chat, setChat] = useState('');
   const navigate = useNavigate();
 
@@ -15,19 +16,37 @@ const Bar = ({ openSetting, setOpenSetting }) => {
   }
 
   const handleSendMessage = (e) => {
+    if (chat === '') return;
     if (e.keyCode === 13) {
-
+      axios.post('http://nearbysns.porito.click/articles', {
+        "content": chat,
+        "latitude": markerPosition[0],
+        "longitude": markerPosition[1],
+      }).then((res) => {
+        setChat('');
+      })
     }
+  }
+
+  const onClickSendMessage = () => {
+    if (chat === '') return;
+    axios.post('http://nearbysns.porito.click/articles', {
+      "content": chat,
+      "latitude": markerPosition[0],
+      "longitude": markerPosition[1],
+    }).then((res) => {
+      setChat('');
+    })
   }
 
   return (
     <div>
       <div className={styles.modalBar}>
-        <input className={styles.modalContent} name="chat" value={chat} onChange={handleChat} onKeyPress={handleSendMessage} />
+        <input className={styles.modalContent} name="chat" value={chat} onChange={handleChat} onKeyDown={handleSendMessage} />
       </div>
 
       <div className={styles.modalButton}>
-        <button className={styles.send}>
+        <button className={styles.send} onClick={onClickSendMessage}>
           <img src={sendIcon} alt="sendIcon" />
         </button>
         <button className={styles.chat}>
