@@ -21,33 +21,20 @@ const MapComponent = ({ position, markerPosition, setMarkerPosition }) => {
     );
   }
 
-  const GetMarker = () => {
-    const map = useMap();
-
-    useEffect(() => {
-      datas.forEach((data) => {
-        const popup = L.popup({
-          autoClose: false,
-          closeOnClick: false,
-          closeButton: false,
-        })
-          .setLatLng([data.latitude, data.longitude])
-          .setContent(data.content)
-          .openOn(map);
-      })
-    }, []);
-
-    return null;
-  }
-
   return (
-    <MapContainer center={position} zoom={18} style={{ height: "100vh", width: "100%", zIndex: "25" }}>
+    <MapContainer center={position} zoom={18} style={{ height: "100vh", width: "100vw", zIndex: "25" }}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
       <LocationMarker />
-      <GetMarker />
+      {datas.map((data) => (
+        <Marker position={[data.latitude, data.longitude]} key={data.articleId}>
+          <Popup autoClose={false} closeOnClick={false} closeButton={false}>
+            {data.content}
+          </Popup>
+        </Marker>
+      ))}
     </MapContainer>
   )
 }

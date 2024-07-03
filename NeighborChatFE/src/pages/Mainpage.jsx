@@ -30,6 +30,7 @@ const Mainpage = () => {
         console.log(error);
       }
     }
+
     fetchData();
     setTimeout(
       axios.get(`http://nearbysns.porito.click/articles?longitude=${markerPosition[1]}&latitude=${markerPosition[0]}&meter=300`, { withCredentials: true})
