@@ -18,7 +18,7 @@ const Bar = ({ openSetting, setOpenSetting, markerPosition, setMarkerPosition })
   const handleSendMessage = (e) => {
     if (chat === '') return;
     if (e.keyCode === 13) {
-      axios.post('http://nearbysns.porito.click/articles', {
+      axios.post('https://nearbysns.porito.click/articles', {
         "content": chat,
         "latitude": markerPosition[0],
         "longitude": markerPosition[1],
@@ -30,7 +30,7 @@ const Bar = ({ openSetting, setOpenSetting, markerPosition, setMarkerPosition })
 
   const onClickSendMessage = () => {
     if (chat === '') return;
-    axios.post('http://nearbysns.porito.click/articles', {
+    axios.post('https://nearbysns.porito.click/articles', {
       "content": chat,
       "latitude": markerPosition[0],
       "longitude": markerPosition[1],

@@ -23,7 +23,7 @@ const Mainpage = () => {
   useEffect( () => {
     const fetchData = async() => {
       try {
-        const response = await axios.get(`http://nearbysns.porito.click/account/whoAmI`, { withCredentials: true}).then((res) => {
+        const response = await axios.get('https://nearbysns.porito.click/account/whoAmI', { withCredentials: true}).then((res) => {
           console.log(res.data)
         });
       } catch(error) {
@@ -33,7 +33,7 @@ const Mainpage = () => {
 
     fetchData();
     setTimeout(
-      axios.get(`http://nearbysns.porito.click/articles?longitude=${markerPosition[1]}&latitude=${markerPosition[0]}&meter=300`, { withCredentials: true})
+      axios.get('https://nearbysns.porito.click/articles?longitude=${markerPosition[1]}&latitude=${markerPosition[0]}&meter=300', { withCredentials: true})
         .then((res) => {
           setMarkers(res.articles);
         })

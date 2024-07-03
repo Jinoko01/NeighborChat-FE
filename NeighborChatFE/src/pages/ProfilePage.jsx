@@ -9,7 +9,7 @@ import axios from 'axios';
 
 // axios 인스턴스 생성
 const api = axios.create({
-  baseURL: 'http://nearbysns.porito.click/', // 서버의 기본 URL을 설정합니다.
+  baseURL: 'https://nearbysns.porito.click/', // 서버의 기본 URL을 설정합니다.
   withCredentials: true, // 쿠키를 포함한 요청을 보낼 때 사용합니다.
 });
 
@@ -27,6 +27,8 @@ const ProfilePage = ({ setOpenSetting }) => {
     content: '',
   });
 
+  const [success, setSuccess] = useState('');
+
   const checkAuthentication = () => {
     return localStorage.getItem('userName') !== null;
   };
@@ -38,6 +40,7 @@ const ProfilePage = ({ setOpenSetting }) => {
     }
     setIsEditing(!isEditing);
     setError({ error: false, content: '' });
+    setSuccess('');
   };
 
   const handleChange = (e) => {
@@ -55,22 +58,35 @@ const ProfilePage = ({ setOpenSetting }) => {
         accountName: userInfo.accountName,
         accountLoginPw: userInfo.currentPw,
       });
-
-      await api.patch('account/update/accountLoginPw', {
-        currentPw: userInfo.currentPw,
-        newPw: userInfo.newPw,
-      },
-      {
-        headers: {
-          Authorization: token,
-        }
-      }
-    );
-
       setIsEditing(false);
-      setError({ error: false, content: '정보가 성공적으로 수정되었습니다.' });
+      setError({ error: true, content: '정보가 성공적으로 수정되었습니다.' });
     } catch (error) {
-      setError({ error: true, content: '정보 수정 중 오류가 발생했습니다.' });
+      if (error.response) {
+        const { message } = error.response.data;
+        setError({ error: true, content: message });
+      } else {
+        setError({ error: true, content: '정보 수정 중 오류가 발생했습니다1.' });
+      }
+      console.error('Failed to update user info:', error);
+    }
+
+    try {
+      if (userInfo.currentPw !== userInfo.newPw) {
+        await api.patch('account/update/accountLoginPw', {
+          currentPw: userInfo.currentPw,
+          newPw: userInfo.newPw,
+        });
+      }
+      setIsEditing(false);
+      handleLogout();
+    } catch (error) {
+      if (error.response) {
+        const { message } = error.response.data;
+        setError({ error: true, content: message });
+      } else {
+        setError({ error: true, content: '정보 수정 중 오류가 발생했습니다2.' });
+        handleLogout();
+      }
       console.error('Failed to update user info:', error);
     }
   };
@@ -130,6 +146,7 @@ const ProfilePage = ({ setOpenSetting }) => {
                 )}
               </div>
               {error.error && <label className={styles.error}>{error.content}</label>}
+              {success && <label className={styles.success}>{success}</label>}
               <Button onClick={isEditing ? handleSave : toggleEditMode}>
                 {isEditing ? '저장' : '정보수정'}
               </Button>
