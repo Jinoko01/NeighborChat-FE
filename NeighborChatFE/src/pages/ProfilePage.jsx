@@ -71,14 +71,13 @@ const ProfilePage = ({ setOpenSetting }) => {
     }
 
     try {
-      if (userInfo.currentPw !== userInfo.newPw) {
+      if (userInfo.currentPw !== userInfo.newPw && userInfo.newPw !== '') {
         await api.patch('account/update/accountLoginPw', {
           currentPw: userInfo.currentPw,
           newPw: userInfo.newPw,
         });
       }
       setIsEditing(false);
-      handleLogout();
     } catch (error) {
       if (error.response) {
         const { message } = error.response.data;
