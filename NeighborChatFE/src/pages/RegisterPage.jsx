@@ -4,9 +4,13 @@ import Button from '../components/Common/Button';
 import styles from '../components/Common/Pages.module.css';
 import NaverMapComponent from "../components/Mainpage/NaverMapComponent.jsx";
 import {NavermapsProvider} from "react-naver-maps";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+
+import axios from 'axios';
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
+
   const [register, setRegister] = useState({
     accountLoginId: '',
     accountLoginPw: '',
@@ -32,11 +36,24 @@ const RegisterPage = () => {
       setError({error:true, content:'빈 칸이 존재합니다.'})
       return 
     }
-
     if (register.accountLoginPw !== register.accountLoginPwCheck){
       setError({error:true, content:'비밀번호가 일치하지 않습니다.'})
       return 
     }
+    axios.post("http://nearbysns.porito.click/account/register", {
+      accountName: register.accountLoginId,
+      accountLoginId: register.accountLoginId,
+      accountLoginPw: register.accountLoginPw,
+    }).then( (res)=>{
+      navigate('/login');
+    }).catch( (err)=>{
+      alert(err.response.status);
+      if( err.response.status == 409){
+        setError({error:true, content:'계정 아이디가 이미 존재합니다.'});
+        return
+      }
+    })
+    
   }
 
   return (
