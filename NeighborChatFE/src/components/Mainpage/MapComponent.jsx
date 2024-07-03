@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import {datas} from '../../mocks/datas.js';
 import L from 'leaflet';
 
-const MapComponent = ({ position, markerPosition, setMarkerPosition }) => {
+const MapComponent = ({ position, markerPosition, setMarkerPosition, markers }) => {
 
   const LocationMarker = () => {
     useMapEvents({
@@ -28,7 +27,7 @@ const MapComponent = ({ position, markerPosition, setMarkerPosition }) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
       <LocationMarker />
-      {datas.map((data) => (
+      {markers.map((data) => (
         <Marker position={[data.latitude, data.longitude]} key={data.articleId}>
           <Popup autoClose={false} closeOnClick={false} closeButton={false}>
             {data.content}

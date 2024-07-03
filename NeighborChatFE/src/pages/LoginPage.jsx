@@ -34,7 +34,7 @@ const LoginPage = () => {
   };
 
   const handleLogin = () => {
-    api.post("http://nearbysns.porito.click/account/login", login)
+    api.post("https://nearbysns.porito.click/account/login", login)
     .then( (res)=>{
       const {accountLoginId, accountName} = res.data;
       localStorage.setItem('userName', accountName);

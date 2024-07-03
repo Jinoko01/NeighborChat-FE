@@ -23,7 +23,7 @@ const Mainpage = () => {
   useEffect( () => {
     const fetchData = async() => {
       try {
-        const response = await axios.get(`http://nearbysns.porito.click/account/whoAmI`, { withCredentials: true}).then((res) => {
+        const response = await axios.get(`https://nearbysns.porito.click/account/whoAmI`, { withCredentials: true}).then((res) => {
           console.log(res.data)
         });
       } catch(error) {
@@ -32,17 +32,28 @@ const Mainpage = () => {
     }
 
     fetchData();
-    setTimeout(
-      axios.get(`http://nearbysns.porito.click/articles?longitude=${markerPosition[1]}&latitude=${markerPosition[0]}&meter=300`, { withCredentials: true})
-        .then((res) => {
-          setMarkers(res.articles);
-        })
-    , 500)
+
+    const getPosts = async() => {
+      try {
+        const response = await axios.get(`https://nearbysns.porito.click/articles?longitude=${markerPosition[1]}&latitude=${markerPosition[0]}&meter=300`, { withCredentials: true})
+          .then((res) => {
+            setMarkers(res.data.articles);
+            console.log(markers);
+          })
+      } catch(e) {
+        console.log(e);
+      }
+    }
+
+    const getPostsInterval = setInterval(getPosts, 500);
+
+    return () => clearInterval(getPostsInterval);
+
   }, []);
 
   return(
     <div>
-      <MapComponent position={position} markerPosition={markerPosition} setMarkerPosition={setMarkerPosition} />
+      <MapComponent position={position} markerPosition={markerPosition} setMarkerPosition={setMarkerPosition} markers={markers} />
       <Bar openSetting={openSetting} setOpenSetting={setOpenSetting} markerPosition={markerPosition} setMarkerPosition={setMarkerPosition} />
       {openSetting && <ProfilePage setOpenSetting={setOpenSetting}/>}
     </div>

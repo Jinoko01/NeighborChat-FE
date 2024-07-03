@@ -35,7 +35,7 @@ const RegisterPage = () => {
       setError({error:true, content:'비밀번호가 일치하지 않습니다.'})
       return
     }
-    axios.post("http://nearbysns.porito.click/account/register", {
+    axios.post("https://nearbysns.porito.click/account/register", {
       accountName: register.accountLoginId,
       accountLoginId: register.accountLoginId,
       accountLoginPw: register.accountLoginPw,
