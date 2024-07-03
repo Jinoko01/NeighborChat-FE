@@ -32,7 +32,7 @@ const LoginPage = () => {
   const handleLogin = () => {
     axios.post("http://nearbysns.porito.click/account/login", login)
     .then( (res)=>{
-
+      localStorage.setItem('authToken', res.data.token);
       navigate('/');
     }).catch( (err)=>{
       if(err.response.status == 400){
