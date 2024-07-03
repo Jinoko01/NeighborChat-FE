@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import axios from 'axios';
 const api = axios.create({
-  baseURL: 'http://nearbysns.porito.click/', // 서버의 기본 URL을 설정합니다.
+  baseURL: 'https://nearbysns.porito.click/', // 서버의 기본 URL을 설정합니다.
   withCredentials: true, // 쿠키를 포함한 요청을 보낼 때 사용합니다.
 });
 
