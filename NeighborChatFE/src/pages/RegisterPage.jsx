@@ -10,7 +10,6 @@ import axios from 'axios';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
-
   const [register, setRegister] = useState({
     accountLoginId: '',
     accountLoginPw: '',
@@ -32,13 +31,9 @@ const RegisterPage = () => {
   };
 
   const handelRegister = () => {
-    if (register.accountLoginId == '' || register.accountLoginPw == '' || register.accountLoginPwCheck == ''){
-      setError({error:true, content:'빈 칸이 존재합니다.'})
-      return 
-    }
     if (register.accountLoginPw !== register.accountLoginPwCheck){
       setError({error:true, content:'비밀번호가 일치하지 않습니다.'})
-      return 
+      return
     }
     axios.post("http://nearbysns.porito.click/account/register", {
       accountName: register.accountLoginId,
@@ -47,11 +42,11 @@ const RegisterPage = () => {
     }).then( (res)=>{
       navigate('/login');
     }).catch( (err)=>{
-      alert(err.response.status);
-      if( err.response.status == 409){
-        setError({error:true, content:'계정 아이디가 이미 존재합니다.'});
-        return
+      if (err.response) {
+        const { status, error: serverError, message } = err.response.data;
+        setError({ error: true, content: message});
       }
+      return
     })
     
   }

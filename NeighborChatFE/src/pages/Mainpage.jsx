@@ -49,8 +49,7 @@ const Mainpage = () => {
 };
 
 const checkAuthentication = () => {
-  // 실제로는 로컬 스토리지, 쿠키 또는 API 요청 등을 사용하여 로그인 상태를 확인합니다.
-  return localStorage.getItem('authToken') !== null;
+  return localStorage.getItem('userName') !== null;
 };
 
 export default Mainpage;
