@@ -14,10 +14,16 @@ const Bar = ({ openSetting, setOpenSetting }) => {
     setChat(e.target.value);
   }
 
+  const handleSendMessage = (e) => {
+    if (e.keyCode === 13) {
+
+    }
+  }
+
   return (
     <div>
       <div className={styles.modalBar}>
-        <input className={styles.modalContent} name="chat" value={chat} onChange={handleChat} />
+        <input className={styles.modalContent} name="chat" value={chat} onChange={handleChat} onKeyPress={handleSendMessage} />
       </div>
 
       <div className={styles.modalButton}>

@@ -3,6 +3,7 @@ import NaverMapComponent from "../components/Mainpage/NaverMapComponent.jsx";
 import {NavermapsProvider} from "react-naver-maps";
 import ProfilePage from "./ProfilePage.jsx";
 import {useState} from "react";
+import MapComponent from "../components/Mainpage/MapComponent.jsx";
 
 
 const Mainpage = () => {
@@ -10,9 +11,10 @@ const Mainpage = () => {
 
   return(
     <div>
-      <NavermapsProvider ncpClientId='xf99yhizgh'>
-        <NaverMapComponent />
-      </NavermapsProvider>
+      {/*<NavermapsProvider ncpClientId='xf99yhizgh'>*/}
+      {/*  <NaverMapComponent />*/}
+      {/*</NavermapsProvider>*/}
+      <MapComponent />
       <Bar openSetting={openSetting} setOpenSetting={setOpenSetting} />
       {openSetting && <ProfilePage setOpenSetting={setOpenSetting}/>}
     </div>
