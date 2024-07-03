@@ -35,7 +35,9 @@ const LoginPage = () => {
 
       navigate('/');
     }).catch( (err)=>{
-      
+      if(err.response.status == 400){
+        
+      }
     })
   }
 
