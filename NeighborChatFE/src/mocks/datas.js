@@ -1,0 +1,32 @@
+export const datas = [
+  {
+    articleId: 0,
+    ownerId: 0,
+    content: "금오지 물 좋아요",
+    createdAt: "2024-07-04T00:00:00Z",
+    expiredAt: "2024-08-08T00:00:00Z",
+    lastModifiedAt: "2024-07-04T00:00:00Z",
+    latitude: 36.14608316034982,
+    longitude: 128.39243213457368,
+  },
+  {
+    articleId: 1,
+    ownerId: 1,
+    content: "? 개별론데 뒤질래?",
+    createdAt: "2024-07-04T00:00:00Z",
+    expiredAt: "2024-08-08T00:00:00Z",
+    lastModifiedAt: "2024-07-04T00:00:00Z",
+    latitude: 36.147,
+    longitude: 128.393,
+  },
+  {
+    articleId: 2,
+    ownerId: 2,
+    content: "니가 청소하셈ㅋㅋ",
+    createdAt: "2024-07-04T00:00:00Z",
+    expiredAt: "2024-08-08T00:00:00Z",
+    lastModifiedAt: "2024-07-04T00:00:00Z",
+    latitude: 36.1473,
+    longitude: 128.3933,
+  },
+]

@@ -21,6 +21,10 @@ const MyMap = ({ location }) => {
       lat: newCenter.y,
       lng: newCenter.x,
     });
+    setCenter({
+      lat: newCenter.y,
+      lng: newCenter.x,
+    })
     console.log(center);
     setInfoWindow(false);
   };
