@@ -1,36 +1,47 @@
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
 import Modal from '../components/Common/Modal';
 import Button from '../components/Common/Button';
-import ProfileImage from '../assets/Profile.png'
+import ProfileImage from '../assets/Profile.png';
 import styles from '../components/Common/Pages.module.css';
-import XIcon from '../assets/X.png'
-
+import XIcon from '../assets/X.png';
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 
-const ProfilePage = ({setOpenSetting}) => {
+// axios 인스턴스 생성
+const api = axios.create({
+  baseURL: 'http://nearbysns.porito.click/', // 서버의 기본 URL을 설정합니다.
+  withCredentials: true, // 쿠키를 포함한 요청을 보낼 때 사용합니다.
+});
+
+const ProfilePage = ({ setOpenSetting }) => {
+  const navigate = useNavigate(); 
   const [isEditing, setIsEditing] = useState(false);
   const [userInfo, setUserInfo] = useState({
-    nickname: '',
-    intro: '',
+    accountName: localStorage.getItem('userName') || '',
+    currentPw: '',
+    newPw: '',
   });
 
   const [error, setError] = useState({
     error: false,
     content: '',
-  })
+  });
+
+  const checkAuthentication = () => {
+    return localStorage.getItem('userName') !== null;
+  };
 
   const toggleEditMode = () => {
-    if(userInfo.nickname == '' && isEditing){
-      setError({error:true, content:'닉네임을 입력해주세요.'})
-      return 
+    if (userInfo.accountName === '' && isEditing) {
+      setError({ error: true, content: '닉네임을 입력해주세요.' });
+      return;
     }
     setIsEditing(!isEditing);
-    setError({error:false, content:''})
+    setError({ error: false, content: '' });
   };
 
   const handleChange = (e) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
 
     setUserInfo({
       ...userInfo,
@@ -38,47 +49,94 @@ const ProfilePage = ({setOpenSetting}) => {
     });
   };
 
+  const handleSave = async () => {
+    try {
+      await api.patch('account/update/accountName', {
+        accountName: userInfo.accountName,
+        accountLoginPw: userInfo.currentPw,
+      });
+
+      await api.patch('account/update/accountLoginPw', {
+        currentPw: userInfo.currentPw,
+        newPw: userInfo.newPw,
+      },
+      {
+        headers: {
+          Authorization: token,
+        }
+      }
+    );
+
+      setIsEditing(false);
+      setError({ error: false, content: '정보가 성공적으로 수정되었습니다.' });
+    } catch (error) {
+      setError({ error: true, content: '정보 수정 중 오류가 발생했습니다.' });
+      console.error('Failed to update user info:', error);
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('userName');
+    navigate('/login');
+  };
+
   return (
     <div>
       <Modal>
-        <div style={{ width: "100%"}}>
-          <button style={{ position: "absolute", top:"10px", left:"20px", cursor:"pointer"}} onClick={() => {setOpenSetting(false)}}>
-            <img src={XIcon} alt="XIcon" style={{width:"10px", height:"10px"}} />
+        <div style={{ width: "100%" }}>
+          <button style={{ position: "absolute", top: "10px", left: "20px", cursor: "pointer" }} onClick={() => { setOpenSetting(false) }}>
+            <img src={XIcon} alt="XIcon" style={{ width: "10px", height: "10px" }} />
           </button>
 
           <h1 className={styles.logo}>프로필</h1>
 
           <div className={styles.inner}>
             <div className={styles.circle}>
-              <img className={styles.profile} src={ProfileImage} alt="프로필_사진" />
+              <img className={styles.profile} src={ProfileImage} alt="프로필 사진" />
             </div>
             <div className={styles.contents}>
               <div className={styles.details}>
                 {isEditing ? (
                   <>
                     <input
-                    type="text"
-                    placeholder="닉네임을 입력해주세요."
-                    className={styles.input}
-                    name="nickname"
-                    value={userInfo.nickname}
-                    onChange={handleChange} />
-                  </>) :
-                  (
-                  <>
-                    <input className={styles.label} readOnly={true} value={userInfo.nickname} />
+                      type="text"
+                      placeholder="닉네임을 입력해주세요."
+                      className={styles.input}
+                      name="accountName"
+                      value={userInfo.accountName}
+                      onChange={handleChange}
+                    />
+                    <input
+                      type="password"
+                      placeholder="현재 비밀번호"
+                      className={styles.input}
+                      name="currentPw"
+                      value={userInfo.currentPw}
+                      onChange={handleChange}
+                    />
+                    <input
+                      type="password"
+                      placeholder="새 비밀번호"
+                      className={styles.input}
+                      name="newPw"
+                      value={userInfo.newPw}
+                      onChange={handleChange}
+                    />
                   </>
-                  )
-                }
+                ) : (
+                  <>
+                    <input className={styles.label} readOnly value={userInfo.accountName} />
+                  </>
+                )}
               </div>
-              <label>{error.error && error.content}</label>
-              <Button onClick={toggleEditMode}>
-              {isEditing ? '저장' : '정보수정'}
+              {error.error && <label className={styles.error}>{error.content}</label>}
+              <Button onClick={isEditing ? handleSave : toggleEditMode}>
+                {isEditing ? '저장' : '정보수정'}
               </Button>
             </div>
           </div>
           <div className={styles.footer}>
-            <Link to="/login" className={styles.link}>로그아웃</Link>
+            <Link to="/login" className={styles.link} onClick={handleLogout}>로그아웃</Link>
           </div>
         </div>
       </Modal>

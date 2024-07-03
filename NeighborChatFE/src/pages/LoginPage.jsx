@@ -7,6 +7,10 @@ import {NavermapsProvider} from "react-naver-maps";
 import { Link, useNavigate } from "react-router-dom";
 
 import axios from 'axios';
+const api = axios.create({
+  baseURL: 'http://nearbysns.porito.click/', // 서버의 기본 URL을 설정합니다.
+  withCredentials: true, // 쿠키를 포함한 요청을 보낼 때 사용합니다.
+});
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -30,14 +34,17 @@ const LoginPage = () => {
   };
 
   const handleLogin = () => {
-    axios.post("http://nearbysns.porito.click/account/login", login)
+    api.post("http://nearbysns.porito.click/account/login", login)
     .then( (res)=>{
-      localStorage.setItem('authToken', res.data.token);
+      const {accountLoginId, accountName} = res.data;
+      localStorage.setItem('userName', accountName);
       navigate('/');
     }).catch( (err)=>{
-      if(err.response.status == 400){
-        
+      if (err.response) {
+        const { status, error: serverError, message } = err.response.data;
+        setError({ error: true, content: message});
       }
+      return
     })
   }
 
