@@ -62,19 +62,10 @@ const ProfilePage = ({setOpenSetting}) => {
                     name="nickname"
                     value={userInfo.nickname}
                     onChange={handleChange} />
-                    <input
-                    type="text"
-                    placeholder="한줄소개를 입력해주세요."
-                    className={styles.input}
-                    maxLength='10'
-                    name="intro"
-                    value={userInfo.intro}
-                    onChange={handleChange} />
                   </>) :
                   (
                   <>
                     <input className={styles.label} readOnly={true} value={userInfo.nickname} />
-                    <input className={styles.label} readOnly={true} value={userInfo.intro} maxLength='10' />
                   </>
                   )
                 }
