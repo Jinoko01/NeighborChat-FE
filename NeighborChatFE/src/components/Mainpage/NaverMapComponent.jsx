@@ -46,7 +46,7 @@ const NaverMapComponent = () => {
       <MapDiv style={{ width: "100vw", height: "100vh", position: "absolute", top: 0, left: 0, bottom: 0 }}>
         <MyMap location={location} />
       </MapDiv>
-      <Button onClick={onGetPosition} style={{ position: "absolute", left: "2vw", top: "3vh", width: "10%"}}>내 위치 찾기</Button>
+      <Button onClick={onGetPosition} style={{ position: "absolute", left: "3vw", top: "3vh", width: "10%"}}>내 위치 찾기</Button>
     </>
   );
 };
