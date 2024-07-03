@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
 import Modal from '../components/Common/Modal';
 import Button from '../components/Common/Button';
 import styles from '../components/Common/Pages.module.css';
 import NaverMapComponent from "../components/Mainpage/NaverMapComponent.jsx";
 import {NavermapsProvider} from "react-naver-maps";
+import { Link, useNavigate } from "react-router-dom";
+
+import axios from 'axios';
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const [login, setLogin] = useState({
     accountLoginId: '',
     accountLoginPw: '',
@@ -19,6 +22,7 @@ const LoginPage = () => {
 
   const handleChange = (e) => {
     const {name, value} = e.target;
+
     setLogin({
       ...login,
       [name]: value,
@@ -26,10 +30,13 @@ const LoginPage = () => {
   };
 
   const handleLogin = () => {
-    if(login.accountLoginId == '' || login.accountLoginPw == ''){
-      setError({error:true, content:'빈 칸이 존재합니다.'})
-      return 
-    }
+    axios.post("http://nearbysns.porito.click/account/login", login)
+    .then( (res)=>{
+
+      navigate('/');
+    }).catch( (err)=>{
+      
+    })
   }
 
   return (
@@ -44,12 +51,16 @@ const LoginPage = () => {
             type="text"
             className={styles.input}
             placeholder="아이디"
+            name = "accountLoginId"
+            value = {login.accountLoginId}
             onChange={handleChange}
           />
           <input
             type="password"
             className={styles.input}
             placeholder="비밀번호"
+            name = "accountLoginPw"
+            value = {login.accountLoginPw}
             onChange={handleChange}
           />
 
